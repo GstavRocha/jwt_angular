@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {AccordionModule} from 'primeng/accordion';
-import {MenuItem} from 'primeng/api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ButtonModule} from "primeng/button";
+import {TableModule} from "primeng/table";
+import {HttpClientModule} from "@angular/common/http";
+import {InputTextModule} from "primeng/inputtext";
+import {PasswordModule} from "primeng/password";
+import {MenubarModule} from "primeng/menubar";
+import {CardModule} from "primeng/card";
+import {FormsModule} from "@angular/forms";
+import {FieldsetModule} from "primeng/fieldset";
+
 
 @NgModule({
   declarations: [
@@ -18,8 +26,18 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ButtonModule,
+    TableModule,
+
+    HttpClientModule,
+    InputTextModule,
+    PasswordModule,
+    MenubarModule,
+    CardModule,
+    FormsModule,
+    FieldsetModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
