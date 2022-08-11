@@ -24,5 +24,8 @@ export class UserService {
   }
   getCliente():Observable<User[]>{
     return this.http.get<any>(this.localhostClientes)
+      .pipe(
+        map((retorno:any) => retorno.data)
+      )
   }
 }
