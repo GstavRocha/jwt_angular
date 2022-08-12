@@ -24,5 +24,5 @@ export class LoginComponent implements OnInit {
     }
   }
   onSubt https://www.bezkoder.com/angular-10-jwt-auth/
-
+parei aqui
 }
