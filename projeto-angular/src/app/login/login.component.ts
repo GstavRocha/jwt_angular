@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../user.service";
+import {AuthService} from "../auth.service";
+import {TokenStorageService} from "../token-storage.service";
+import {TokenService} from "../token.service";
 
 @Component({
   selector: 'app-login',
@@ -7,19 +10,19 @@ import {UserService} from "../user.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  usuario = '';
-  senha = '';
-  constructor(private user: UserService) { }
+  form: any = {};
+  isLoogged = false;
+  noLoogged = false;
+  erroMessage = '';
+  roles: string[]=[];
+  constructor( private authService: AuthService, private tokenStorage: TokenService){ }
 
   ngOnInit(): void {
-    this.login();
-    this.getCliente();
+    if (this.tokenStorage.getToken()) {
+      this.isLoogged = true;
+      this.roles = this.tokenStorage.getToken().roles;
+    }
   }
-  login(): void{
-    this.user.login(this.usuario, this.senha);
-  }
-  getCliente():void {
-    this.user.getCliente();
-    console.log(this.usuario, this.login())
-  }
+  onSubt https://www.bezkoder.com/angular-10-jwt-auth/
+
 }

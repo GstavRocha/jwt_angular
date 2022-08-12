@@ -10,6 +10,6 @@ export class UsersService {
 
   constructor(private http: HttpClient) {}
   getPublicContent(): Observable<any>{
-    return this.http.get(API_URL + 'all', {responseType: "text"})
+    return this.http.get(API_URL + 'all', {responseType: 'text'});
   }
 }
