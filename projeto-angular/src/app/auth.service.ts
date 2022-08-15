@@ -1,22 +1,25 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map, Observable} from "rxjs";
+import {User} from "./user";
+
 
 const AUTH_API = "http://localhost:3000/login";
-const httOptions = {
-  headers: new Headers({'Content-Type': 'application/jason', Authorization: 'x-access-token'})
-}
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class AuthService{
+
   constructor(private http: HttpClient) {}
 
-  login(credentials): Observable<any>{
-    return this.http.post(AUTH_API + 'signin'{
-      username: credentials.username, password: credentials.password
-    }, httOptions)
+  login(name: string, password: string): Observable<User[]>{
+    return this.http.post<(User)>(AUTH_API,{name, password},httpOptions)
+      .pipe(
+        map((retorno: any) => retorno.data)
+      )
   }
-
   getAuthorizationToken(){
     return 'some-auth-token';
   }

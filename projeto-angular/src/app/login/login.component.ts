@@ -3,6 +3,7 @@ import {UserService} from "../user.service";
 import {AuthService} from "../auth.service";
 import {TokenStorageService} from "../token-storage.service";
 import {TokenService} from "../token.service";
+import {User} from "../user";
 
 @Component({
   selector: 'app-login',
@@ -10,19 +11,39 @@ import {TokenService} from "../token.service";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  usuario = '';
+  senha = '';
+  currentUser: any;
   form: any = {};
-  isLoogged = false;
-  noLoogged = false;
-  erroMessage = '';
-  roles: string[]=[];
-  constructor( private authService: AuthService, private tokenStorage: TokenService){ }
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
+  accessToken: any;
+  constructor( private authService: AuthService, private tokenStorage: TokenStorageService){
+
+  }
 
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
-      this.isLoogged = true;
-      this.roles = this.tokenStorage.getToken().roles;
+      this.isLoggedIn = true;
     }
   }
-  onSubt https://www.bezkoder.com/angular-10-jwt-auth/
-parei aqui
+  onSubmit(): void {
+    this.authService.login(this.usuario, this.senha).subscribe(
+      data => {
+        this.tokenStorage.saveToken(this.accessToken);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
+  reloadPage(): void {
+    window.location.reload();
+  }
 }
