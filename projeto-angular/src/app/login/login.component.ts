@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../user.service";
-import {AuthService} from "../auth.service";
-import {TokenStorageService} from "../token-storage.service";
-import {TokenService} from "../token.service";
-import {User} from "../user";
+import {UsersService} from "../users.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -11,39 +8,29 @@ import {User} from "../user";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  usuario = '';
-  senha = '';
-  currentUser: any;
-  form: any = {};
-  isLoggedIn = false;
-  isLoginFailed = false;
-  errorMessage = '';
-  roles: string[] = [];
-  accessToken: any;
-  constructor( private authService: AuthService, private tokenStorage: TokenStorageService){
+  user: string;
+  password: string;
 
+  constructor(private loginservice: UsersService, private route: Router) {
+    this.user = '';
+    this.password = '';
   }
 
   ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-    }
   }
-  onSubmit(): void {
-    this.authService.login(this.usuario, this.senha).subscribe(
-      data => {
-        this.tokenStorage.saveToken(this.accessToken);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.reloadPage();
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-      }
-    );
-  }
-  reloadPage(): void {
-    window.location.reload();
+
+  submit(): void {
+    this.loginservice.login(
+      this.user, this.password
+    )
+      .pipe()
+      .subscribe({
+        next: () => {
+          this.route.navigate(['/'])
+        },
+        error: () => {
+          console.log(`Usuario ou senha incorretos. Usuario: ${this.user}, Senha: ${this.password}`);
+        },
+      });
   }
 }

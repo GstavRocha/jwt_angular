@@ -8,14 +8,13 @@ import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ButtonModule} from "primeng/button";
 import {TableModule} from "primeng/table";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {InputTextModule} from "primeng/inputtext";
 import {PasswordModule} from "primeng/password";
 import {MenubarModule} from "primeng/menubar";
 import {CardModule} from "primeng/card";
 import {FormsModule} from "@angular/forms";
 import {FieldsetModule} from "primeng/fieldset";
-import {authInterceptorProviders} from "./_helpers/auth.interceptor";
 
 
 @NgModule({
@@ -40,7 +39,7 @@ import {authInterceptorProviders} from "./_helpers/auth.interceptor";
     FieldsetModule,
 
   ],
-  providers: [authInterceptorProviders],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
