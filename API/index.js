@@ -1,22 +1,22 @@
-const http = require('http');
+// require("dotenv-safe").config();
+const cors = require('cors');
 
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 
+app.use(express.json());
+app.use(cors());
 
-const SECRET = "mysecret"
-app.use(bodyParser.json());
-
-app.get('/',(req,res,next) => {
-    res.json({message: "Tudo está OK"})
+app.get('', (req, res, next) => {
+    res.json({message: "Tudo ok por aqui!"});
 })
+
 const verifyJWT = (req, res, next) =>{
     const token = req.headers['x-access-token'];
     if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
 
-    jwt.verify(token, process.env.SECRET, function(err, decoded) {
+    jwt.verify(token, function(err, decoded) {
         if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
 
         req.userId = decoded.id;
@@ -25,22 +25,22 @@ const verifyJWT = (req, res, next) =>{
 }
 
 app.get('/clientes',(req, res, next) => {
-    console.log( "Retornou cliente ");
-    res.json([{id:1,nome:'Aluno Exemplar'}]);
+    console.log("Retornou todos clientes!");
+    res.json([{id:1,nome:'Gustavo'}]);
 })
-app.post('/login',( req, res) =>{
-    if(req.body.user === 'Gustavo' && req.body.password === '123'){
-        const id = 1;
-        let token = jwt.sign({id},SECRET, {expiresIn: 300});
-        return res.json({ auth: true, token: token});
+app.post("/login", (req, res, next) => {
+    if (req.body.usuario === "luiz" && req.body.senha === "123") {
+      const id = 1;
+      const token = jwt.sign({ id });
+      return res.send({ auth: true, token: token });
     }
-    res.status(500).json({message: 'Login Inválido'});
-})
+    res.status(500).json({ message: "Login inválido!" });
+  });
 
 app.post('/logout',function (req, res){
     res.json({auth: false, token: null});
 })
 
-const server = http.createServer(app);
-server.listen(3000);
+
+app.listen(3000);
 console.log("Servidor escutando porta 3000")
