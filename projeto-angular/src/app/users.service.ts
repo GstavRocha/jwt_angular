@@ -26,7 +26,7 @@ export class UsersService {
       'headers': new HttpHeaders(httpOtptions)
     })
   }
-  login(name: any, password: any){
+  login(name: string, password: string){
     return this.http.post<{AuthToken: string}>(this.localHostLogin,{
       name: name,
       password: password,
@@ -45,5 +45,8 @@ export class UsersService {
   get logged(): boolean{
     return localStorage.getItem('access_token') !== null;
   }
-// removi o dont-env da api
+  getStatus(){
+    return
+  }
+
 }

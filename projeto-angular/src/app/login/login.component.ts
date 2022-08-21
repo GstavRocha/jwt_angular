@@ -8,12 +8,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  user: string;
-  password: string;
+  user = '';
+  password = '';
 
   constructor(private loginservice: UsersService, private route: Router) {
-    this.user = '';
-    this.password = '';
   }
 
   ngOnInit(): void {
@@ -26,7 +24,7 @@ export class LoginComponent implements OnInit {
       .pipe()
       .subscribe({
         next: () => {
-          this.route.navigate(['/'])
+          this.route.navigate(['/']).then(r => )
         },
         error: () => {
           console.log(`Usuario ou senha incorretos. Usuario: ${this.user}, Senha: ${this.password}`);
