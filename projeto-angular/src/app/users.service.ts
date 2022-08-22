@@ -27,13 +27,13 @@ export class UsersService {
     })
   }
   login(name: string, password: string){
-    return this.http.post<{AuthToken: string}>(this.localHostLogin,{
+    return this.http.post<{token: string}>(this.localHostLogin,{
       name: name,
       password: password,
     })
       .pipe(
-      map((result: {AuthToken: string})=>{
-        localStorage.setItem('access_token', result.AuthToken);
+      map((result: {token: string})=>{
+        localStorage.setItem('access_token', result.token);
         return true;
       })
       );
@@ -45,8 +45,6 @@ export class UsersService {
   get logged(): boolean{
     return localStorage.getItem('access_token') !== null;
   }
-  getStatus(){
-    return
-  }
+
 
 }

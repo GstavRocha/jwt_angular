@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       .pipe()
       .subscribe({
         next: () => {
-          this.route.navigate(['/']).then(r => )
+          this.route.navigate(['/'])
         },
         error: () => {
           console.log(`Usuario ou senha incorretos. Usuario: ${this.user}, Senha: ${this.password}`);
