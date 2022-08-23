@@ -25,9 +25,9 @@ const verifyJWT = (req, res, next) =>{
     });
 }
 
-app.get('/clientes',(req, res, next) => {
+app.get('/clientes',verifyJWT,(req, res, next) => {
     console.log( "Retornou cliente ");
-    res.json([{id:1,nome:'Aluno Exemplar'}]);
+    res.json([{id:1,nome:'Gustavo Rocha'}]);
 })
 app.post('/login',( req, res) =>{
     if(req.body.user === 'Gustavo' && req.body.password === '123'){

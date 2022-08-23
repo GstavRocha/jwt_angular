@@ -1,4 +1,8 @@
+body{
+  align-items: center;
+}
 nav{
   background: darkorchid;
   color: whitesmoke;
 }
+

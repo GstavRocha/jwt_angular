@@ -22,13 +22,13 @@ export class UsersService {
       'content-type': 'application/json',
       'x-access-token': token
     }
-    return this.http.get<any>(this.localhost,{
+    return this.http.get<any>(this.localHostCliente,{
       'headers': new HttpHeaders(httpOtptions)
     })
   }
   login(name: string, password: string){
     return this.http.post<{token: string}>(this.localHostLogin,{
-      name: name,
+      user: name,
       password: password,
     })
       .pipe(

@@ -1,16 +1,19 @@
-<p-card>
-  <hr />
-  <form (ngSubmit)="submit()">
-    <span>
-      Login: <input name="user" [(ngModel)]="user" type="text" pInputText />
-    </span>
-    <br><br>
-    <span>
-      Password:<input name="password" [(ngModel)]="password" type="text" pInputText />
-    </span>
-    <p>
-      <button type="submit" pButton label="Entrar"></button>
-    </p>
-  </form>
-  <p>
-</p-card>
+
+<div class="elementos">
+  <div class="align-items-center">
+    <form (ngSubmit)="submit()" class="col-xl-12 align-items-center">
+      <p>
+        Login: <input name="user" [(ngModel)]="user" type="text" pInputText />
+      </p>
+      <br>
+      <p>
+        Password:
+        <p-password [(ngModel)]="password" name="senha"></p-password>
+      </p>
+      <p>
+        <button pButton label="Entrar" class="btn badge-primary"></button>
+      </p>
+    </form>
+  </div>
+</div>
+
